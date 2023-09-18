@@ -1,0 +1,83 @@
+<form [formGroup]="cadastroForm" (ngSubmit)="submitForm()">
+
+  <label>
+    Email:
+    <input type="text" formControlName="email"/>
+    <span
+      class="alert"
+      *ngIf="
+        cadastroForm.get('email')?.errors &&
+        (cadastroForm.get('email')?.touched ||
+          cadastroForm.get('email')?.dirty)
+      "
+    >
+      Favor adicionar um email valido
+    </span>
+  </label>
+
+  <br>
+  <br>
+
+  <label>
+    Nome:
+    <input type="text" formControlName="firstName" maxlength="5" />
+    <span
+      class="alert"
+      *ngIf="
+        cadastroForm.get('firstName')?.errors &&
+        (cadastroForm.get('firstName')?.touched ||
+          cadastroForm.get('firstName')?.dirty)
+      "
+    >
+      Favor adicionar o Nome
+    </span>
+  </label>
+
+  <br />
+  <br />
+
+  <label>
+    Sobre Nome:
+    <input type="text" formControlName="lastName" minlength="5"/>
+    <span
+      class="alert"
+      *ngIf="
+        cadastroForm.get('lastName')?.errors &&
+        (cadastroForm.get('lastName')?.touched ||
+          cadastroForm.get('lastName')?.dirty)
+      ">
+      Favor deve ter no minimo 5 maximo 10, E voçe ja digitou
+      {{ cadastroForm.get('lastName')?.errors?.['minlength']?.actualLength }}
+      {{ cadastroForm.get('lastName')?.errors?.['maxlength']?.actualLength }}
+    </span>
+  </label>
+
+  <p>
+
+    <br>
+    <br>
+
+    {{ cadastroForm.get("email")?.value }}
+    {{ cadastroForm.get("email")?.errors | json }}
+    {{ cadastroForm.get("email")?.touched | json }}
+    {{ cadastroForm.get("email")?.dirty | json }}
+
+    <br>
+    <br>
+
+    {{ cadastroForm.get("firstName")?.value }}
+    {{ cadastroForm.get("firstName")?.errors | json }}
+    {{ cadastroForm.get("firstName")?.touched | json }}
+    {{ cadastroForm.get("firstName")?.dirty | json }}
+
+    <br />
+    <br />
+
+    {{ cadastroForm.get("lastName")?.value }}
+    {{ cadastroForm.get("lastName")?.errors | json }}
+    {{ cadastroForm.get("lastName")?.touched | json }}
+    {{ cadastroForm.get("lastName")?.dirty | json }}
+  </p>
+
+  <button [disabled]="cadastroForm.invalid">Enviar</button>
+</form>
